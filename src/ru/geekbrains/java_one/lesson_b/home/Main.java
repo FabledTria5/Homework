@@ -18,12 +18,12 @@ public class Main {
         System.out.println(Arrays.toString(doubleNumbers(third)));
 
         // Результат выполнения четвертого пункта
-        int[] fifth = new int[] {15, 25, 3, 19, -55, -100, 94, 66, 15, 0, 71};
-        System.out.println("Максимальное значение равно " + findMax(fifth) + ", минимальное значение равно " + findMin(fifth));
+        int[] fourth = new int[] {15, 25, 3, 19, -55, -100, 94, 66, 15, 0, 71};
+        System.out.println("Максимальное значение равно " + findMax(fourth) + ", минимальное значение равно " + findMin(fourth));
 
         // Результат выполнения пятого пункта
-        int[][] fourth = new int[5][5];
-        System.out.println(Arrays.deepToString(fillDiagonal(fourth)).replace("],", "\n"));
+        int[][] fifth = new int[5][5];
+        System.out.println(Arrays.deepToString(fillDiagonal(fifth)).replace("],", "\n"));
 
         // Результат выполнения шестого пункта
         int[] sixth = new int[] {10, 1, 2, 3, 4};
