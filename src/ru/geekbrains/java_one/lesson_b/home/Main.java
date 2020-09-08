@@ -26,7 +26,7 @@ public class Main {
         System.out.println(Arrays.deepToString(fillDiagonal(fourth)).replace("],", "\n"));
 
         // Результат выполнения шестого пункта
-        int[] sixth = new int[] {2, 2, 2, 1, 2, 2, 10, 1};
+        int[] sixth = new int[] {10, 1, 2, 3, 4};
         System.out.println(checkBalance(sixth));
 
         // Результат выполнения седьмого пункта
@@ -99,16 +99,17 @@ public class Main {
 //  если в массиве есть место, в котором сумма левой и правой части массива равны.
     private static boolean checkBalance(int[] array) {
         int firstPartSum = 0;
-        int secondPartSum = 0;
+        int sum = 0;
+
+        for (int value: array) {
+            sum += value;
+        }
+
         for (int i = 0; i < array.length; i++) {
             firstPartSum += array[i];
-            for (int j = i + 1; j < array.length; j++) {
-                secondPartSum += array[j];
-            }
-            if (firstPartSum == secondPartSum) {
+            if (firstPartSum == sum - firstPartSum) {
                 return true;
             }
-            secondPartSum = 0;
         }
         return false;
     }
