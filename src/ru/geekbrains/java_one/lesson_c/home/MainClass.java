@@ -51,12 +51,21 @@ public class MainClass {
     public static boolean checkWin(char symbol) {
         int row = 0;
         int column = 0;
+        int leftDia = 0;
+        int rightDia = 0;
 
-        for (int i = 0; i < SIZE; i++) { //ПОдсчитываем кол-во одинковых символов в каждой строке и столбце поля. Когда значение становится раным DOTS_TO_WIN возвращаем true
+        for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < DOTS_TO_WIN; j++) {
-                row = (map[i][j] == symbol) ? row + 1 : 0;
-                column = (map[j][i] == symbol) ? column + 1 : 0;
-                if (row == DOTS_TO_WIN || column == DOTS_TO_WIN) return true;
+                row = (map[i][j] == symbol) ? row + 1 : row;
+                column = (map[j][i] == symbol) ? column + 1 : column;
+                leftDia = (map[i][i] == symbol && i == j) ? leftDia + 1 : leftDia;
+                rightDia = (map[i][SIZE - 1 - j] == symbol) ? rightDia + 1: rightDia;
+            }
+            if (row == DOTS_TO_WIN || column == DOTS_TO_WIN || leftDia == DOTS_TO_WIN | rightDia == DOTS_TO_WIN) {
+                return true;
+            } else {
+                row = 0;
+                column = 0;
             }
         }
         return false;
