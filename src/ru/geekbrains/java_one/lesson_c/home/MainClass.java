@@ -58,9 +58,9 @@ public class MainClass {
             for (int j = 0; j < DOTS_TO_WIN; j++) {
                 row = (map[i][j] == symbol) ? row + 1 : row;
                 column = (map[j][i] == symbol) ? column + 1 : column;
-                leftDia = (map[i][i] == symbol && i == j) ? leftDia + 1 : leftDia;
-                rightDia = (map[i][SIZE - 1 - j] == symbol) ? rightDia + 1: rightDia;
             }
+            leftDia = (map[i][i] == symbol) ? leftDia + 1 : leftDia;
+            rightDia = (map[i][SIZE - 1 - i] == symbol) ? rightDia + 1: rightDia;
             if (row == DOTS_TO_WIN || column == DOTS_TO_WIN || leftDia == DOTS_TO_WIN | rightDia == DOTS_TO_WIN) {
                 return true;
             } else {
