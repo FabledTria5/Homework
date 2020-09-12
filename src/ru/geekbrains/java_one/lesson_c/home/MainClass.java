@@ -55,14 +55,19 @@ public class MainClass {
         int leftMainDia = 1;
         int rightMainDia = 1;
 
-        for (int i = 0; i < SIZE - 1; i++) {
-            for (int j = 1; j <= SIZE - 1; j++) { //Просматривает таблицу на наличие заданного символа в строках и столбцах
-                row = (map[i][j] == symbol && map[i][j] == map[i][j - 1]) ? row + 1 : row;
-                column = (map[j][i] == symbol && map[j][i] == map[j - 1][i]) ? column + 1 : column;
+        for (int i = 1; i <= SIZE; i++) {
+
+            //Просматривает таблицу на наличие заданного символа в строках и столбцах
+            for (int j = 1; j <= SIZE - 1; j++) {
+                row = (map[i - 1][j] == symbol && map[i - 1][j] == map[i - 1][j - 1]) ? row + 1 : row;
+                column = (map[j][i - 1] == symbol && map[j][i - 1] == map[j - 1][i - 1]) ? column + 1 : column;
             }
-            // Подсчет нужных символов в двух главных диагоналях
-            leftMainDia = (map[i][i] == symbol && map[i][i] == map[i + 1][i + 1]) ? leftMainDia + 1 : leftMainDia;
-            rightMainDia = (map[i][SIZE - 1 - i] == symbol && map[i][SIZE - 1 -i] == map[i + 1][SIZE - 2 - i]) ? rightMainDia + 1 : rightMainDia;
+
+            // Подсчет нужных символов в двух главных диагоналях. В отдельный цикл вынесено из-за сложности с интеграцией с главной переменной цикла
+            for (int d = 0; d < SIZE - 1; d++) {
+                leftMainDia = (map[d][d] == symbol && map[d][d] == map[d + 1][d + 1]) ? leftMainDia + 1 : leftMainDia;
+                rightMainDia = (map[d][SIZE - 1 - d] == symbol && map[d][SIZE - 1 - d] == map[d + 1][SIZE - 2 - d]) ? rightMainDia + 1 : rightMainDia;
+            }
 
             if (SIZE > 3) { //Если размер поля больше 3, то проверяем 4 побочные диагонали, на которых может образоваться линия
 
@@ -89,6 +94,8 @@ public class MainClass {
             } else { //Обнуление переменных для корректной работы следующей итерации цикла
                 row = 1;
                 column = 1;
+                leftMainDia = 1;
+                rightMainDia = 1;
             }
         }
         return false;
