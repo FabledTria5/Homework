@@ -49,23 +49,46 @@ public class MainClass {
     }
 
     public static boolean checkWin(char symbol) {
-        int row = 0;
-        int column = 0;
-        int leftDia = 0;
-        int rightDia = 0;
+        //По умолчанию перменные счетчики для строк, столбцов и главных диагоналей равны 1, т.к. кол-во проверок в циклах всегда на 1 меньше стоящих в ряд символов
+        int row = 1;
+        int column = 1;
+        int leftMainDia = 1;
+        int rightMainDia = 1;
 
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < DOTS_TO_WIN; j++) {
-                row = (map[i][j] == symbol) ? row + 1 : row;
-                column = (map[j][i] == symbol) ? column + 1 : column;
+        for (int i = 0; i < SIZE - 1; i++) {
+            for (int j = 1; j <= SIZE - 1; j++) { //Просматривает таблицу на наличие заданного символа в строках и столбцах
+                row = (map[i][j] == symbol && map[i][j] == map[i][j - 1]) ? row + 1 : row;
+                column = (map[j][i] == symbol && map[j][i] == map[j - 1][i]) ? column + 1 : column;
             }
-            leftDia = (map[i][i] == symbol) ? leftDia + 1 : leftDia;
-            rightDia = (map[i][SIZE - 1 - i] == symbol) ? rightDia + 1: rightDia;
-            if (row == DOTS_TO_WIN || column == DOTS_TO_WIN || leftDia == DOTS_TO_WIN | rightDia == DOTS_TO_WIN) {
+            // Подсчет нужных символов в двух главных диагоналях
+            leftMainDia = (map[i][i] == symbol && map[i][i] == map[i + 1][i + 1]) ? leftMainDia + 1 : leftMainDia;
+            rightMainDia = (map[i][SIZE - 1 - i] == symbol && map[i][SIZE - 1 -i] == map[i + 1][SIZE - 2 - i]) ? rightMainDia + 1 : rightMainDia;
+
+            if (SIZE > 3) { //Если размер поля больше 3, то проверяем 4 побочные диагонали, на которых может образоваться линия
+
+                int upSecondaryLeftDia = 0;
+                int dwnSecondaryLeftDia = 0;
+                int dwnSecondaryRightDia = 0;
+                int upSecondaryRightDia = 0;
+
+                for (int k = 0; k < SIZE - 1; k++) {
+                    dwnSecondaryLeftDia = (map[k][k + 1] == symbol) ? dwnSecondaryLeftDia + 1 : dwnSecondaryLeftDia;
+                    upSecondaryLeftDia = (map[k + 1][k] == symbol) ? upSecondaryLeftDia + 1 : upSecondaryLeftDia;
+
+                    upSecondaryRightDia = (map[k][SIZE - 2 - k] == symbol) ? upSecondaryRightDia + 1 : upSecondaryRightDia;
+                    dwnSecondaryRightDia = (map[k + 1][SIZE - 1 - k] == symbol) ? dwnSecondaryRightDia + 1 : dwnSecondaryRightDia;
+                }
+
+                // Если найдено нужное кол-во символов в пбочной диагонали, возвращаем true
+                if (dwnSecondaryLeftDia == DOTS_TO_WIN || upSecondaryLeftDia == DOTS_TO_WIN || dwnSecondaryRightDia == DOTS_TO_WIN || upSecondaryRightDia == DOTS_TO_WIN) return true;
+            }
+
+            //Если найдено нужное ко-во символов в строке, столбце или диагонали, выдаем true
+            if (row == DOTS_TO_WIN || column == DOTS_TO_WIN || leftMainDia == DOTS_TO_WIN || rightMainDia == DOTS_TO_WIN) {
                 return true;
-            } else {
-                row = 0;
-                column = 0;
+            } else { //Обнуление переменных для корректной работы следующей итерации цикла
+                row = 1;
+                column = 1;
             }
         }
         return false;
