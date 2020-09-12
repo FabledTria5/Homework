@@ -79,12 +79,12 @@ public class MainClass {
                     dwnSecondaryRightDia = (map[k + 1][SIZE - 1 - k] == symbol) ? dwnSecondaryRightDia + 1 : dwnSecondaryRightDia;
                 }
 
-                // Если найдено нужное кол-во символов в пбочной диагонали, возвращаем true
+                // Если найдено нужное кол-во символов в побочной диагонали, возвращаем true
                 if (dwnSecondaryLeftDia == DOTS_TO_WIN || upSecondaryLeftDia == DOTS_TO_WIN || dwnSecondaryRightDia == DOTS_TO_WIN || upSecondaryRightDia == DOTS_TO_WIN) return true;
             }
 
             //Если найдено нужное ко-во символов в строке, столбце или диагонали, выдаем true
-            if (row == DOTS_TO_WIN || column == DOTS_TO_WIN || leftMainDia == DOTS_TO_WIN || rightMainDia == DOTS_TO_WIN) {
+            if (row >= DOTS_TO_WIN || column >= DOTS_TO_WIN || leftMainDia >= DOTS_TO_WIN || rightMainDia >= DOTS_TO_WIN) {
                 return true;
             } else { //Обнуление переменных для корректной работы следующей итерации цикла
                 row = 1;
