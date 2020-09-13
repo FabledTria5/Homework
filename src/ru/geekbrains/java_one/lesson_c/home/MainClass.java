@@ -147,6 +147,7 @@ public class MainClass {
         lastPlayerY = y;
     }
 
+    // Возвращает ко-во свободных клеток на поле
     public static int getFreeCells() {
         for (int i = 0; i < map.length - 1; i++) {
             for (int j = 0; j < map.length; j++) {
