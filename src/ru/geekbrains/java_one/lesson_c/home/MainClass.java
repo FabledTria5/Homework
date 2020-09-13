@@ -113,16 +113,20 @@ public class MainClass {
             x = rand.nextInt(SIZE);
             y = rand.nextInt(SIZE);
 
-            if (x < lastPlayerX) {
-                x += 1;
-            } else if (x > lastPlayerX) {
-                x -= 1;
-            }
+            // Следующий код пододвигает полученный случайно координаты ближе к последней позиции пользователя
+            // Выключено для размера поля 3х3, т.к. там и обычный алгоритм неплохо справляется
+            if (SIZE > 3) {
+                if (x < lastPlayerX) {
+                    x += 1;
+                } else if (x > lastPlayerX) {
+                    x -= 1;
+                }
 
-            if (y < lastPlayerY) {
-                y += 1;
-            } else if (y > lastPlayerY) {
-                y -= 1;
+                if (y < lastPlayerY) {
+                    y += 1;
+                } else if (y > lastPlayerY) {
+                    y -= 1;
+                }
             }
         } while (!isCellValid(x, y));
         System.out.println("Компьютер походил в точку " + (x + 1) + " " + (y + 1));
