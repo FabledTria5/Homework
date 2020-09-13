@@ -7,6 +7,8 @@ public class MainClass {
 
     public static int SIZE;
     public static int DOTS_TO_WIN;
+    public static int lastPlayerX;
+    public static int lastPlayerY;
 
     public static final char DOT_EMPTY = '•';
     public static final char DOT_X = 'X';
@@ -110,6 +112,18 @@ public class MainClass {
         do {
             x = rand.nextInt(SIZE);
             y = rand.nextInt(SIZE);
+
+            if (x < lastPlayerX) {
+                x += 1;
+            } else if (x > lastPlayerX) {
+                x -= 1;
+            }
+
+            if (y < lastPlayerY) {
+                y += 1;
+            } else if (y > lastPlayerY) {
+                y -= 1;
+            }
         } while (!isCellValid(x, y));
         System.out.println("Компьютер походил в точку " + (x + 1) + " " + (y + 1));
         map[y][x] = DOT_O;
@@ -123,6 +137,8 @@ public class MainClass {
             y = sc.nextInt() - 1;
         } while (!isCellValid(x, y)); // while(isCellValid(x, y) == false)
         map[y][x] = DOT_X;
+        lastPlayerX = x;
+        lastPlayerY = y;
     }
 
     public static boolean isCellValid(int x, int y) {
