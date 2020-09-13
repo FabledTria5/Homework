@@ -9,6 +9,7 @@ public class MainClass {
     public static int DOTS_TO_WIN;
     public static int lastPlayerX;
     public static int lastPlayerY;
+    public static int freeCells;
 
     public static final char DOT_EMPTY = '•';
     public static final char DOT_X = 'X';
@@ -115,7 +116,8 @@ public class MainClass {
 
             // Следующий код пододвигает полученный случайно координаты ближе к последней позиции пользователя
             // Выключено для размера поля 3х3, т.к. там и обычный алгоритм неплохо справляется
-            if (SIZE > 3) {
+            // Отключается, когда на поле остается мало свободных ячеек
+            if (SIZE > 3 && getFreeCells() > 5) {
                 if (x < lastPlayerX) {
                     x += 1;
                 } else if (x > lastPlayerX) {
@@ -143,6 +145,15 @@ public class MainClass {
         map[y][x] = DOT_X;
         lastPlayerX = x;
         lastPlayerY = y;
+    }
+
+    public static int getFreeCells() {
+        for (int i = 0; i < map.length - 1; i++) {
+            for (int j = 0; j < map.length; j++) {
+                if (map[i][j] == DOT_EMPTY) freeCells += 1;
+            }
+        }
+        return freeCells;
     }
 
     public static boolean isCellValid(int x, int y) {
