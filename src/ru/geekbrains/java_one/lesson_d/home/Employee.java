@@ -17,10 +17,6 @@ public class Employee {
         this.age = age;
     }
 
-    public int get_id() {
-        return _id;
-    }
-
     public String getName() {
         return name;
     }
@@ -36,10 +32,10 @@ public class Employee {
     @Override
     public String toString() {
         return "Информация о работнике: " +
-                "имя='" + name + '\'' +
-                ", зарплата=" + salary +
-                ", возраст=" + age +
-                ", _id=" + employeeId +
+                "имя = '" + name + '\'' +
+                ", зарплата = " + salary +
+                ", возраст = " + age +
+                ", _id = " + employeeId +
                 '}';
     }
 
