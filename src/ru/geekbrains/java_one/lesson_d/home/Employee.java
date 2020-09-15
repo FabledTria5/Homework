@@ -3,7 +3,7 @@ package ru.geekbrains.java_one.lesson_d.home;
 public class Employee {
 
     private final String name;
-    private final int employee_id;
+    private final int employeeId;
 
     private int salary;
     private int age;
@@ -11,7 +11,7 @@ public class Employee {
     private static int _id = 0;
 
     public Employee(String name, int salary, int age) {
-        this.employee_id = _id++;
+        this.employeeId = _id++;
         this.name = name;
         this.salary = salary;
         this.age = age;
@@ -39,7 +39,7 @@ public class Employee {
                 "имя='" + name + '\'' +
                 ", зарплата=" + salary +
                 ", возраст=" + age +
-                ", _id=" + employee_id +
+                ", _id=" + employeeId +
                 '}';
     }
 
