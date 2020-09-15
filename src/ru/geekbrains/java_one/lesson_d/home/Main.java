@@ -27,7 +27,7 @@ public class Main {
 
     // Создать метод, повышающий зарплату всем сотрудникам старше 45 лет на 5000
     private static void increaseSalary(Employee[] employees) {
-        for (Employee employee: employees) {
+        for (Employee employee : employees) {
             if (employee.getAge() > 45) {
                 employee.increaseSalary(5000);
             }
@@ -38,7 +38,7 @@ public class Main {
     public static double getAverageSalary(Employee[] employees) {
         double averageSalary = 0;
 
-        for (Employee employee: employees) {
+        for (Employee employee : employees) {
             averageSalary += employee.getSalary();
         }
         return averageSalary / employees.length;
@@ -47,12 +47,11 @@ public class Main {
     public static int getAverageAge(Employee[] employees) {
         int averageAge = 0;
 
-        for (Employee employee: employees) {
+        for (Employee employee : employees) {
             averageAge += employee.getAge();
         }
         return averageAge / employees.length;
     }
-
 
     private static int getRandomAge() { //Просто чтобы было интереснее
         return (int) (Math.random() * 80);
