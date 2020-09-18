@@ -3,7 +3,6 @@ package ru.geekbrains.java_one.lesson_e.home;
 public abstract class Animal {
 
     protected String animalType;
-
     protected String name;
     protected int age;
 
