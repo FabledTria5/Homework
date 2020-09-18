@@ -13,8 +13,8 @@ public class Dog extends Animal {
         jumpHeight = defaultJumpHeight;
         swimDistance = defaultSwimDistance;
 
-        runDistance = (Math.random() >= 0.5) ? defaultRunDistance + 100 : defaultRunDistance - 100;
-        jumpHeight = (Math.random() >= 0.5) ? defaultJumpHeight + 2 : defaultJumpHeight - 0.2;
-        swimDistance = (Math.random() >= 0.5) ? defaultSwimDistance + 10 : defaultSwimDistance - 5;
+        runDistance = (Math.random() > 0.5) ? defaultRunDistance + 100 : defaultRunDistance - 100;
+        jumpHeight = (Math.random() > 0.5) ? defaultJumpHeight + 2 : defaultJumpHeight - 0.2;
+        swimDistance = (Math.random() > 0.5) ? defaultSwimDistance + 10 : defaultSwimDistance - 5;
     }
 }

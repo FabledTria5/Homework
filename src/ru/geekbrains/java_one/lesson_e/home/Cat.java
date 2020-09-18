@@ -11,8 +11,8 @@ public class Cat extends Animal {
         runDistance = defaultRunDistance;
         jumpHeight = defaultJumpHeight;
 
-        runDistance = (Math.random() >= 0.5) ? defaultRunDistance + 100 : defaultRunDistance - 100;
-        jumpHeight = (Math.random() >= 0.5) ? defaultJumpHeight + 1 : defaultJumpHeight - 0.5;
+        runDistance = (Math.random() > 0.5) ? defaultRunDistance + 100 : defaultRunDistance - 100;
+        jumpHeight = (Math.random() > 0.5) ? defaultJumpHeight + 1 : defaultJumpHeight - 0.5;
     }
 
     @Override
