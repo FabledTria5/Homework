@@ -6,8 +6,6 @@ import java.util.Scanner;
 public class Main {
 
     private static final String[] dictionary = {"Кот ", "Собака ", "Дорога ", "Дом ", "Небо ", " Солнце ", "Самолет ", "\n", "Море ", "Природа ", "Программа ", "Музей "};
-
-    private static final Scanner scanner = new Scanner(System.in);
     private static Scanner fileScanner;
 
     public static void main(String[] args) {
@@ -48,6 +46,8 @@ public class Main {
 
     // Написать метод, «склеивающий» эти файлы, то есть вначале идет текст из первого файла, потом текст из второго.
     private static void unitFiles() {
+        Scanner scanner = new Scanner(System.in);
+
         System.out.print("Сколько файлов вы хотите объединить? ");
         int num = scanner.nextInt();
         String[] files = new String[num];
