@@ -6,9 +6,9 @@ import java.util.Scanner;
 
 public class Main {
 
+    private static final String[] dictionary = {"Кот ", "Собака ", "Дрога ", "Дом ", "Небо ", " Солнце ", "Самолет ", "Море ", "Природа ", "Программа ", "Музей "};
+
     private static final Scanner scanner = new Scanner(System.in);
-    private static final int alphabetStart = 32;
-    private static final int alphabetEnd = 90;
 
     public static void main(String[] args) {
         createFiles(2, 200);
@@ -22,11 +22,11 @@ public class Main {
 
                 fos.write(("Начало " + (i + 1) + " файла: ").getBytes());
 
-                char[] bytes = new char[symbols];
+                String word;
 
-                for (int j = 0; j < bytes.length; j++) {
-                    bytes[i] = (char) (alphabetStart + Math.random() * alphabetEnd);
-                    fos.write(bytes[i]);
+                for (int j = 0; j < 10; j++) {
+                    word = dictionary[(int) (Math.random() * dictionary.length)];
+                    fos.write(word.getBytes());
                 }
 
                 fos.close();
