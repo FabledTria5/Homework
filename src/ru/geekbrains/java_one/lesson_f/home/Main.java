@@ -5,16 +5,16 @@ import java.util.Scanner;
 
 public class Main {
 
-    private static final String[] dictionary = {"Кот ", "Собака ", "Дрога ", "Дом ", "Небо ", " Солнце ", "Самолет ", "\n", "Море ", "Природа ", "Программа ", "Музей "};
+    private static final String[] dictionary = {"Кот ", "Собака ", "Дорога ", "Дом ", "Небо ", " Солнце ", "Самолет ", "\n", "Море ", "Природа ", "Программа ", "Музей "};
 
     private static final Scanner scanner = new Scanner(System.in);
     private static Scanner fileScanner;
 
     public static void main(String[] args) {
-        createFiles(2, 200);
+        createFiles(2);
         unitFiles();
 
-        if (isWordInFile("file1.txt", "Небо ")) {
+        if (isWordInFile("file1.txt", "Небо")) {
             System.out.println("Искомое слово присутствует в файле");
         } else {
             System.out.println("Файл не содержит искомого слова");
@@ -25,23 +25,18 @@ public class Main {
         } else {
             System.out.println("Файлы в каталоге не содержат искомого слова");
         }
-
-
     }
 
     // Создать 2 текстовых файла, примерно по 50-100 символов в каждом
-    private static void createFiles(int quantity, int symbols) {
+    private static void createFiles(int quantity) {
         for (int i = 0; i < quantity; i++) {
             try {
                 FileOutputStream fos = new FileOutputStream("file" + (i + 1) + ".txt", true);
 
                 fos.write(("Начало " + (i + 1) + " файла: ").getBytes());
 
-                String word;
-
                 for (int j = 0; j < 10; j++) {
-                    word = dictionary[(int) (Math.random() * dictionary.length)];
-                    fos.write(word.getBytes());
+                    fos.write(dictionary[(int) (Math.random() * dictionary.length)].getBytes());
                 }
 
                 fos.close();
@@ -66,7 +61,6 @@ public class Main {
 
         for (String file : files) {
             try {
-                StringBuilder sb = new StringBuilder();
                 PrintStream ps = new PrintStream(new FileOutputStream("file" + (files.length + 1) + ".txt", true));
                 fileScanner = new Scanner(new FileInputStream(file));
 
@@ -86,7 +80,6 @@ public class Main {
     private static boolean isWordInFile(String fileName, String word) {
 
         try {
-
             fileScanner = new Scanner(new FileInputStream(fileName));
 
             while (fileScanner.hasNext()) {
