@@ -109,9 +109,7 @@ public class Main {
         if (filesInDir == null) return false;
 
         for (File file : filesInDir) {
-            if (file.isFile() && isWordInFile(file.getName(), word)) {
-                return true;
-            }
+            if (file.isFile() && isWordInFile(file.getName(), word)) return true;
         }
 
         return false;
