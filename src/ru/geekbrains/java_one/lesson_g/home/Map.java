@@ -12,19 +12,27 @@ public class Map extends JPanel {
 
     public Map() {
         //Установка цвета карты
-        setBackground(new Color(0x0a, 0x4f, 0xb0));
+        setBackground(Color.lightGray);
     }
 
     public void startNewGame(int gameMode, int fieldSize, int winLength) {
+        clearField();
         drawField(fieldSize);
     }
 
     private void drawField(int fieldSize) {
-        for (int i = 0, coordinateY = calculateXPadding(fieldSize * SIZE); i < fieldSize; i++, coordinateY+=SIZE) {
-            for (int j = 0, coordinateX = calculateYPadding(fieldSize * SIZE); j < fieldSize; j++, coordinateX+=SIZE) {
+        for (int i = 0, coordinateY = calculateYPadding(fieldSize * SIZE); i < fieldSize; i++, coordinateY += SIZE) {
+            for (int j = 0, coordinateX = calculateXPadding(fieldSize * SIZE); j < fieldSize; j++, coordinateX += SIZE) {
                 drawRectangle(coordinateX, coordinateY);
             }
         }
+    }
+
+    private void clearField() {
+        Graphics g = getGraphics();
+        g.drawRect(0, 0, 1300, 1300);
+        g.setColor(Color.LIGHT_GRAY);
+        g.fillRect(0, 0, 1300, 1300);
     }
 
     private void drawRectangle(int x, int y) {
@@ -33,10 +41,10 @@ public class Map extends JPanel {
     }
 
     private int calculateXPadding(int fieldWidth) {
-        return 0;
+        return GameWindow.WIN_WIDTH / 2 - fieldWidth / 2;
     }
 
     private int calculateYPadding(int fieldHeight) {
-        return 0;
+        return GameWindow.WIN_HEIGHT / 2 - fieldHeight / 2;
     }
 }
