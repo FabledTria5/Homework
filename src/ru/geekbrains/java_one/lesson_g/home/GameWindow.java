@@ -4,10 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GameWindow extends JFrame {
-    public static final int WIN_WIDTH = 507;
-    public static final int WIN_HEIGHT = 555;
-    public static final int WIN_POSX = 650;
-    public static final int WIN_POSY = 250;
+    public static final int WIN_WIDTH = 1200;
+    public static final int WIN_HEIGHT = 1000;
+    public static final int WIN_POSX = 350;
+    public static final int WIN_POSY = 50;
 
     private final Map map;
 
@@ -18,6 +18,7 @@ public class GameWindow extends JFrame {
         //Установка размеров окна
         setSize(WIN_WIDTH, WIN_HEIGHT);
         setLocation(WIN_POSX, WIN_POSY);
+        setResizable(false);
 
         //Заголовок окна
         setTitle("TicTacToe");
@@ -36,7 +37,7 @@ public class GameWindow extends JFrame {
         map = new Map();
         SettingsWindow settings = new SettingsWindow(this);
 
-        //Слушатели нажатий на кнопки. Так как уже встречал лябда выражения, решил применить их здесь для более компактного кода
+        //Слушатели нажатий на кнопки. Так как уже встречал лямбда выражения, решил применить их здесь для более компактного кода
         btnStart.addActionListener(actionEvent -> settings.setVisible(true));
         btnStop.addActionListener(actionEvent -> System.exit(0));
 
@@ -46,8 +47,8 @@ public class GameWindow extends JFrame {
         setVisible(true);
     }
 
-    public void acceptSettings(int gameMode, int fieldSizeX, int fieldSizeY, int winLength) {
+    public void acceptSettings(int gameMode, int fieldSize, int winLength) {
         //Пограничный метод, который собирает данные из окна настроек и начинает игру
-        map.startNewGame(gameMode, fieldSizeX, fieldSizeY, winLength);
+        map.startNewGame(gameMode, fieldSize, winLength);
     }
 }

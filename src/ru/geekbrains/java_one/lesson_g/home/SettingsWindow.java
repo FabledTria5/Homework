@@ -100,7 +100,7 @@ public class SettingsWindow extends JFrame {
         int fieldSize = slideFieldSize.getValue();
         int winLen = slideWinLen.getValue();
 
-        gameWindow.acceptSettings(gameMode, fieldSize, fieldSize, winLen);
+        gameWindow.acceptSettings(gameMode, fieldSize, winLen);
 
         setVisible(false);
     }
