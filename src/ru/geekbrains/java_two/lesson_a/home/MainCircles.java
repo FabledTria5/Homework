@@ -9,7 +9,7 @@ public class MainCircles extends JFrame {
     private static final int POS_Y = 200;
     private static final int WINDOW_WIDTH = 800;
     private static final int WINDOW_HEIGHT = 600;
-    public static final int BACKGROUND_CHANGE_TIME = 900; //Нужна для счета прошедшего времени. Сейчас примерно равно 20 секунд
+    public static final int BACKGROUND_CHANGE_TIME = 900; //Нужна для подсчета прошедшего времени. Сейчас примерно равно 20 секунд
 
     private static float calls = 0;
 
@@ -65,6 +65,7 @@ public class MainCircles extends JFrame {
         for (Sprite sprite : sprites) {
             if (sprite.getLeft() <= cX && sprite.getRight() >= cX && sprite.getTop() <= cY && sprite.getBottom() >= cY) {
                 sprite.hide();
+                break;
             }
         }
     }
