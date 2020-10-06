@@ -52,6 +52,7 @@ public class Sprite {
 
     void render(GameCanvas canvas, Graphics g) {}
 
+    // Метод для скрытия шарика
     void hide() {}
 
 }

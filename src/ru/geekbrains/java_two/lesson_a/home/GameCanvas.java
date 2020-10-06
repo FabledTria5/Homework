@@ -15,6 +15,7 @@ public class GameCanvas extends JPanel {
         this.controller = controller;
         lastFrameTime = System.nanoTime();
 
+        //Слушатель кликов по полю
         this.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {

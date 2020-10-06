@@ -7,6 +7,7 @@ public class Ball extends Sprite {
     private final Color color;
     private float vX;
     private float vY;
+    //Начальные значения для координат, куда будут спрятаны шарики
     private int hiddenX = -5;
     private int hiddenY = -5;
 
@@ -19,6 +20,7 @@ public class Ball extends Sprite {
                 (int) (Math.random() * 255)  // B
         );
 
+        //Добавляем разеры шаров, чтобы они точно были спрятаны при любых размерах
         hiddenX -= halfWidth * 2;
         hiddenY -= halfHeight * 2;
 
@@ -55,6 +57,7 @@ public class Ball extends Sprite {
         g.fillOval((int) getLeft(), (int) getTop(), (int) getWidth(), (int) getHeight());
     }
 
+    //Ставим нулевую скорость и перемещаем шарик туда, где его точно не увидят
     @Override
     void hide() {
         vX = 0;
