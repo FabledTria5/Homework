@@ -16,9 +16,9 @@ public class Ball extends Sprite {
         halfHeight = 20 + (float) (Math.random() * 50f);
         halfWidth = halfHeight;
         color = new Color(
-                (int) (Math.random() * 255), // R
-                (int) (Math.random() * 255), // G
-                (int) (Math.random() * 255)  // B
+                (int) (Math.random() * 255),
+                (int) (Math.random() * 255),
+                (int) (Math.random() * 255) 
         );
 
         //Добавляем разеры шаров, чтобы они точно были спрятаны при любых размерах

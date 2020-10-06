@@ -6,7 +6,7 @@ public class Background {
 
     private static final Color startColor = Color.LIGHT_GRAY; //Начальный цвет поля
 
-    //Массив с заготовленными цветами
+    //Массив с заготовленными цветами. Можно было и рандомно, но очень часто выпадали темные цвета
     private static final Color[] colors = {Color.decode("#ADFF2F"),
             Color.decode("#FFA07A"),
             Color.decode("#FFA500"),
