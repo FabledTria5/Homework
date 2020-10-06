@@ -32,7 +32,7 @@ public class MainCircles extends JFrame {
 
     private void initApplication() {
         for (int i = 0; i < sprites.length; i++) {
-            sprites[i] = new Ball();
+            sprites[i] = new Ball(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
         }
     }
 
@@ -51,11 +51,10 @@ public class MainCircles extends JFrame {
     }
 
     //Добавляет в массив новый шарик с помощью другого массива
-    public void addCircle() {
+    public void addCircle(int cX, int cY) {
         Sprite[] newSprites = new Sprite[sprites.length + 1];
         System.arraycopy(sprites, 0, newSprites, 0, sprites.length);
-        newSprites[newSprites.length - 1] = new Ball();
-
+        newSprites[newSprites.length - 1] = new Ball(cX, cY);
         sprites = new Sprite[newSprites.length];
         System.arraycopy(newSprites, 0, sprites, 0, sprites.length);
     }
