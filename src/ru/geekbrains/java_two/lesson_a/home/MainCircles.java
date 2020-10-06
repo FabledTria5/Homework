@@ -49,6 +49,15 @@ public class MainCircles extends JFrame {
         render(canvas, g);
     }
 
+    public void addCircle() {
+        Sprite[] newSprites = new Sprite[sprites.length + 1];
+        System.arraycopy(sprites, 0, newSprites, 0, sprites.length);
+        newSprites[newSprites.length - 1] = new Ball();
+
+        sprites = new Sprite[newSprites.length];
+        System.arraycopy(newSprites, 0, sprites, 0, sprites.length);
+    }
+
     private void update(GameCanvas canvas, float deltaTime) {
         for (Sprite sprite : sprites) {
             sprite.update(canvas, deltaTime);
