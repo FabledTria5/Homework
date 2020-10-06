@@ -9,7 +9,7 @@ public class MainCircles extends JFrame {
     private static final int POS_Y = 200;
     private static final int WINDOW_WIDTH = 800;
     private static final int WINDOW_HEIGHT = 600;
-    public static final int BACKGROUND_CHANGE_TIME = 1800;
+    public static final int BACKGROUND_CHANGE_TIME = 900;
 
     private static float calls = 0;
 
@@ -40,7 +40,7 @@ public class MainCircles extends JFrame {
         calls += 1;
 
         if (calls == Integer.MAX_VALUE) {
-            calls = 0;
+            calls = Integer.MAX_VALUE % BACKGROUND_CHANGE_TIME;
         } else if (calls % BACKGROUND_CHANGE_TIME == 0) {
             canvas.setBackground(Background.getColor());
         }
