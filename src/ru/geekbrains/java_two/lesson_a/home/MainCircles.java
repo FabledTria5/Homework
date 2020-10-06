@@ -32,7 +32,7 @@ public class MainCircles extends JFrame {
 
     private void initApplication() {
         for (int i = 0; i < sprites.length; i++) {
-            sprites[i] = new Ball(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+            sprites[i] = new Ball(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2); //Шарики появляются в центре поля
         }
     }
 
@@ -55,6 +55,7 @@ public class MainCircles extends JFrame {
         Sprite[] newSprites = new Sprite[sprites.length + 1];
         System.arraycopy(sprites, 0, newSprites, 0, sprites.length);
         newSprites[newSprites.length - 1] = new Ball(cX, cY);
+
         sprites = new Sprite[newSprites.length];
         System.arraycopy(newSprites, 0, sprites, 0, sprites.length);
     }

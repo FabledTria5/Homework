@@ -25,9 +25,11 @@ public class Ball extends Sprite {
         hiddenX -= halfWidth * 2;
         hiddenY -= halfHeight * 2;
 
+        //Задание координат появления шариков
         this.x = x;
         this.y = y;
 
+        //Векторы скорости теперь могут как положительными, так и отрицательными для различных начальных траекторий шариков
         vX = (Math.random() <= 0.5) ? (float) -(100f + (Math.random() * 200f)) : (float) (100f + (Math.random() * 200f));
         vY = (Math.random() <= 0.5) ? (float) -(100f + (Math.random() * 200f)) : (float) (100f + (Math.random() * 200f));
 
