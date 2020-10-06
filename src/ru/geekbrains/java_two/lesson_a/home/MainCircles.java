@@ -9,8 +9,9 @@ public class MainCircles extends JFrame {
     private static final int POS_Y = 200;
     private static final int WINDOW_WIDTH = 800;
     private static final int WINDOW_HEIGHT = 600;
+    public static final int BACKGROUND_CHANGE_TIME = 1800;
 
-    private static float passedTime = 0f;
+    private static float calls = 0;
 
     Sprite[] sprites = new Sprite[10];
 
@@ -25,6 +26,7 @@ public class MainCircles extends JFrame {
         add(canvas);
         initApplication();
         setTitle("Circles");
+        canvas.setBackground(Background.getStartColor());
         setVisible(true);
     }
 
@@ -35,10 +37,12 @@ public class MainCircles extends JFrame {
     }
 
     public void onDrawFrame(GameCanvas canvas, Graphics g, float deltaTime) {
-        passedTime += deltaTime;
+        calls += 1;
 
-        if ((int) passedTime % 10 == 0) {
-            setBackground(Background.getColor());
+        if (calls == Integer.MAX_VALUE) {
+            calls = 0;
+        } else if (calls % BACKGROUND_CHANGE_TIME == 0) {
+            canvas.setBackground(Background.getColor());
         }
 
         update(canvas, deltaTime);

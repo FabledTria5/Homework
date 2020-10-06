@@ -4,10 +4,23 @@ import java.awt.*;
 
 public class Background {
 
-    public static final Color startColor = Color.LIGHT_GRAY;
+    private static final Color startColor = Color.LIGHT_GRAY;
+
+    private static final Color[] colors = {Color.decode("#ADFF2F"),
+            Color.decode("#FFA07A"),
+            Color.decode("#FFA500"),
+            Color.decode("#00FFFF"),
+            Color.decode("#DAA520"),
+            Color.decode("#66CDAA"),
+            Color.decode("#EEE8AA")
+    };
 
     public static Color getColor() {
-        return Color.LIGHT_GRAY;
+        return colors[(int) (Math.random() * colors.length)];
+    }
+
+    public static Color getStartColor() {
+        return startColor;
     }
 
 }
