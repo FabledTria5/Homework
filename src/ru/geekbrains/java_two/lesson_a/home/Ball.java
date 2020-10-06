@@ -7,11 +7,12 @@ public class Ball extends Sprite {
     private final Color color;
     private float vX;
     private float vY;
+
     //Начальные значения для координат, куда будут спрятаны шарики
     private int hiddenX = -5;
     private int hiddenY = -5;
 
-    Ball() {
+    Ball(int x, int y) {
         halfHeight = 20 + (float) (Math.random() * 50f);
         halfWidth = halfHeight;
         color = new Color(
@@ -24,8 +25,12 @@ public class Ball extends Sprite {
         hiddenX -= halfWidth * 2;
         hiddenY -= halfHeight * 2;
 
-        vX = (float) (100f + (Math.random() * 200f));
-        vY = (float) (100f + (Math.random() * 200f));
+        this.x = x;
+        this.y = y;
+
+        vX = (Math.random() <= 0.5) ? (float) -(100f + (Math.random() * 200f)) : (float) (100f + (Math.random() * 200f));
+        vY = (Math.random() <= 0.5) ? (float) -(100f + (Math.random() * 200f)) : (float) (100f + (Math.random() * 200f));
+
     }
 
     @Override
