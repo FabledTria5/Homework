@@ -3,9 +3,12 @@ package ru.geekbrains.java_two.lesson_a.home;
 import java.awt.*;
 
 public class Ball extends Sprite {
+
     private final Color color;
     private float vX;
     private float vY;
+    private int hiddenX = -5;
+    private int hiddenY = -5;
 
     Ball() {
         halfHeight = 20 + (float) (Math.random() * 50f);
@@ -15,6 +18,10 @@ public class Ball extends Sprite {
                 (int) (Math.random() * 255), // G
                 (int) (Math.random() * 255)  // B
         );
+
+        hiddenX -= halfWidth * 2;
+        hiddenY -= halfHeight * 2;
+
         vX = (float) (100f + (Math.random() * 200f));
         vY = (float) (100f + (Math.random() * 200f));
     }
@@ -24,7 +31,7 @@ public class Ball extends Sprite {
         x += vX * deltaTime;
         y += vY * deltaTime;
 
-        if (getLeft() < canvas.getLeft()) {
+        if (getLeft() < canvas.getLeft() && getLeft() != hiddenX) {
             setLeft(canvas.getLeft());
             vX = -vX;
         }
@@ -32,7 +39,7 @@ public class Ball extends Sprite {
             setRight(canvas.getRight());
             vX = -vX;
         }
-        if (getTop() < canvas.getTop()) {
+        if (getTop() < canvas.getTop() && getTop() != hiddenY) {
             setTop(canvas.getTop());
             vY = -vY;
         }
@@ -46,5 +53,13 @@ public class Ball extends Sprite {
     void render(GameCanvas canvas, Graphics g) {
         g.setColor(color);
         g.fillOval((int) getLeft(), (int) getTop(), (int) getWidth(), (int) getHeight());
+    }
+
+    @Override
+    void hide() {
+        vX = 0;
+        vY = 0;
+        setLeft(hiddenX);
+        setTop(hiddenY);
     }
 }

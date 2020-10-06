@@ -20,6 +20,8 @@ public class GameCanvas extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 if (e.getButton() == MouseEvent.BUTTON1) {
                     controller.addCircle();
+                } else if (e.getButton() == MouseEvent.BUTTON3) {
+                    controller.removeCircle(e.getX(), e.getY());
                 }
             }
 

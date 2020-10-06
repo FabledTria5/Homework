@@ -58,6 +58,14 @@ public class MainCircles extends JFrame {
         System.arraycopy(newSprites, 0, sprites, 0, sprites.length);
     }
 
+    public void removeCircle(int cX, int cY) {
+        for (Sprite sprite : sprites) {
+            if (sprite.getLeft() <= cX && sprite.getRight() >= cX && sprite.getTop() <= cY && sprite.getBottom() >= cY) {
+                sprite.hide();
+            }
+        }
+    }
+
     private void update(GameCanvas canvas, float deltaTime) {
         for (Sprite sprite : sprites) {
             sprite.update(canvas, deltaTime);

@@ -52,4 +52,6 @@ public class Sprite {
 
     void render(GameCanvas canvas, Graphics g) {}
 
+    void hide() {}
+
 }
