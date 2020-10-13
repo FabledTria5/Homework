@@ -13,6 +13,7 @@ public class Person {
 
     public Person(String lastName, String phone, String eMail) {
 
+        // Если в массиве есть пользователь с таким же именем, то переносим его данные в массивы нового пользователя, а старого удаляем
         for (Person person : PERSON_ARRAY_LIST) {
             if (person.getLastName().equals(lastName)) {
                 PERSON_TO_DELETE = person;
