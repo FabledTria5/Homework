@@ -17,13 +17,22 @@ public class Main {
         System.out.println("Слова из текста встречаются такое кол-во раз: " + countWords(text));
         System.out.println();
 
+        // Второе задание
         Person sam = new Person("Newman", "+79165456341", "example@mail.com");
-        Person tim = new Person("Newman", "+79165454325", "example5@mail.com");
+        Person tim = new Person("Newman", "+79165454325", "TimNew@mail.com");
+        Person bob = new Person("Caster", "+87920657152", "bobCast@gmail.com");
 
         PhoneBook.addPerson(sam);
         PhoneBook.addPerson(tim);
+        PhoneBook.addPerson(bob);
 
-        System.out.println(PhoneBook.getPhoneNumber("Newman"));
+        System.out.println("По фамилии Newman были найдены следующие номера телефонов: \n" + PhoneBook.getPhoneNumber("Newman"));
+        System.out.println("По фамилии Newman были найдены следующие адреса электронной почты: \n" + PhoneBook.getMails("Newman"));
+
+        System.out.println();
+
+        System.out.println("По фамилии Caster были найдены следующие номера телефонов: \n" + PhoneBook.getPhoneNumber("Caster"));
+        System.out.println("По фамилии Caster были найдены следующие адреса электронной почты: \n" + PhoneBook.getMails("Caster"));
     }
 
     // Возвращает уникальные слова в тексте
