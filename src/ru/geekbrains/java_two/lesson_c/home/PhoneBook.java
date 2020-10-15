@@ -5,18 +5,32 @@ import java.util.LinkedHashMap;
 
 public class PhoneBook {
 
-    private static final LinkedHashMap<String, Person> phoneBook = new LinkedHashMap<>();
+    private static final LinkedHashMap<String, ArrayList<Person>> phoneBook = new LinkedHashMap<>();
 
     public static void addPerson(Person person) {
-        phoneBook.put(person.getLastName(), person);
+        if (!phoneBook.containsKey(person.getLastName())) {
+            var persons = new ArrayList<Person>();
+            persons.add(person);
+            phoneBook.put(person.getLastName(), persons);
+        } else {
+            phoneBook.get(person.getLastName()).add(person);
+        }
     }
 
     public static ArrayList<String> getPhoneNumber(String personLastName) {
-        return phoneBook.get(personLastName).getPhones();
+        var phones = new ArrayList<String>();
+        for (Person person : phoneBook.get(personLastName)) {
+            phones.add(person.getPhones());
+        }
+        return phones;
     }
 
     public static ArrayList<String> getMails(String personLastName) {
-        return phoneBook.get(personLastName).getMails();
+        var mails = new ArrayList<String>();
+        for (Person person : phoneBook.get(personLastName)) {
+            mails.add(person.getMails());
+        }
+        return mails;
     }
 
 }

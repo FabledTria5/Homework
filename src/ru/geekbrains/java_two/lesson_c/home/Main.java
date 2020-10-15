@@ -21,9 +21,11 @@ public class Main {
         Person sam = new Person("Newman", "+79165456341", "example@mail.com");
         Person tim = new Person("Newman", "+79165454325", "TimNew@mail.com");
         Person bob = new Person("Caster", "+87920657152", "bobCast@gmail.com");
+        Person james = new Person("Caster", "+1789976542", "JCAS@gmail.com");
 
         PhoneBook.addPerson(sam);
         PhoneBook.addPerson(tim);
+        PhoneBook.addPerson(james);
         PhoneBook.addPerson(bob);
 
         System.out.println("По фамилии Newman были найдены следующие номера телефонов: \n" + PhoneBook.getPhoneNumber("Newman"));

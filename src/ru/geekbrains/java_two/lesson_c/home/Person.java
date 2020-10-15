@@ -1,45 +1,26 @@
 package ru.geekbrains.java_two.lesson_c.home;
 
-import java.util.ArrayList;
-
 public class Person {
 
-    private static final ArrayList<Person> PERSON_ARRAY_LIST = new ArrayList<>(); // Здесь хранятся все уникальные пользователи
-    private static Person PERSON_TO_DELETE;  //Здесь хранится пользователь, который будет удален при создании однофамильца
-
     private final String lastName;
-    private final ArrayList<String> phones = new ArrayList<>();
-    private final ArrayList<String> mails = new ArrayList<>();
+    private final String phone;
+    private final String mail;
 
     public Person(String lastName, String phone, String eMail) {
-
-        // Если в массиве есть пользователь с таким же именем, то переносим его данные в массивы нового пользователя, а старого удаляем
-        for (Person person : PERSON_ARRAY_LIST) {
-            if (person.getLastName().equals(lastName)) {
-                PERSON_TO_DELETE = person;
-                this.phones.addAll(person.getPhones());
-                this.mails.addAll(person.getMails());
-                break;
-            }
-        }
-
-        PERSON_ARRAY_LIST.remove(PERSON_TO_DELETE);
-
         this.lastName = lastName;
-        this.phones.add(phone);
-        this.mails.add(eMail);
-        PERSON_ARRAY_LIST.add(this);
+        this.phone = phone;
+        this.mail = eMail;
     }
 
     public String getLastName() {
         return lastName;
     }
 
-    public ArrayList<String> getPhones() {
-        return phones;
+    public String getPhones() {
+        return phone;
     }
 
-    public ArrayList<String> getMails() {
-        return mails;
+    public String getMails() {
+        return mail;
     }
 }
