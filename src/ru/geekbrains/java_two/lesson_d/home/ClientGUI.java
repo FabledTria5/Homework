@@ -1,9 +1,11 @@
 package ru.geekbrains.java_two.lesson_d.home;
 
 import javax.swing.*;
-import javax.swing.text.DateFormatter;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -60,7 +62,7 @@ public class ClientGUI extends JFrame implements ActionListener, Thread.Uncaught
             @Override
             public void keyTyped(KeyEvent e) {
                 if (e.getKeyChar() == KeyEvent.VK_ENTER) {
-                    logMessage(tfMessage.getText());
+                    sendMessage(tfMessage.getText());
                     tfMessage.setText("");
                 }
             }
@@ -84,7 +86,7 @@ public class ClientGUI extends JFrame implements ActionListener, Thread.Uncaught
             System.out.println("select");
             setAlwaysOnTop(cbAlwaysOnTop.isSelected());
         } else if (src == btnSend) {
-            logMessage(tfMessage.getText());
+            sendMessage(tfMessage.getText());
             tfMessage.setText("");
         } else {
             throw new RuntimeException("Unknown action source: " + src);
@@ -103,9 +105,23 @@ public class ClientGUI extends JFrame implements ActionListener, Thread.Uncaught
         System.exit(1);
     }
 
-    private void logMessage(String message) {
+    private void sendMessage(String message) {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
-        log.append(now.format(dateFormatter) + "   " + message + "\n");
+        String messageString = now.format(dateFormatter) + "   " + message + "\n";
+        log.append(messageString);
+
+        try {
+            writeToLog(messageString);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    private void writeToLog(String messageString) throws IOException {
+        PrintStream fileOutputStream = new PrintStream(new FileOutputStream("log.txt", true));
+        fileOutputStream.print(messageString);
+        fileOutputStream.close();
     }
 }
