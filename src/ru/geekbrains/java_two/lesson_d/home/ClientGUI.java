@@ -64,7 +64,6 @@ public class ClientGUI extends JFrame implements ActionListener, Thread.Uncaught
             public void keyReleased(KeyEvent e) {
                 if (e.getKeyChar() == KeyEvent.VK_ENTER) {
                     sendMessage(tfMessage.getText());
-                    tfMessage.setText("");
                 }
             }
         });
@@ -88,7 +87,6 @@ public class ClientGUI extends JFrame implements ActionListener, Thread.Uncaught
             setAlwaysOnTop(cbAlwaysOnTop.isSelected());
         } else if (src == btnSend) {
             sendMessage(tfMessage.getText());
-            tfMessage.setText("");
         } else {
             throw new RuntimeException("Unknown action source: " + src);
         }
@@ -108,6 +106,7 @@ public class ClientGUI extends JFrame implements ActionListener, Thread.Uncaught
 
     // Запись сообщений в окно сообщений
     private void sendMessage(String message) {
+        if (message.equals("")) return;
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         String messageString = now.format(dateFormatter) + "   " + message + "\n";
@@ -119,6 +118,7 @@ public class ClientGUI extends JFrame implements ActionListener, Thread.Uncaught
             throw new RuntimeException(e);
         }
 
+        tfMessage.setText("");
     }
 
     // Запись сообщений в текстовый файл
