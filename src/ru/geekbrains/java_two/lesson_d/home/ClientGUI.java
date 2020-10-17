@@ -11,8 +11,8 @@ import java.time.format.DateTimeFormatter;
 
 public class ClientGUI extends JFrame implements ActionListener, Thread.UncaughtExceptionHandler {
 
-    private static final int WIDTH = 600;
-    private static final int HEIGHT = 500;
+    private static final int WIDTH = 800;
+    private static final int HEIGHT = 600;
     private static final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // Размер экрана пользователя для позиционирования окна
 
     private final JTextArea log = new JTextArea();
@@ -41,7 +41,7 @@ public class ClientGUI extends JFrame implements ActionListener, Thread.Uncaught
         String[] users = {"user1", "user2", "user3", "user4", "user5",
                 "user_with_an_exceptionally_long_name_in_this_chat"};
         userList.setListData(users);
-        scrollUser.setPreferredSize(new Dimension(100, 0));
+        scrollUser.setPreferredSize(new Dimension(150, 0));
         cbAlwaysOnTop.addActionListener(this);
 
         panelTop.add(tfIPAddress);
