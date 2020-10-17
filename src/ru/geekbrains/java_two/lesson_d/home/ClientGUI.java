@@ -13,6 +13,7 @@ public class ClientGUI extends JFrame implements ActionListener, Thread.Uncaught
 
     private static final int WIDTH = 600;
     private static final int HEIGHT = 500;
+    private static final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // Размер экрана пользователя для позиционирования окна
 
     private final JTextArea log = new JTextArea();
     private final JPanel panelTop = new JPanel(new GridLayout(2, 3));
@@ -33,8 +34,8 @@ public class ClientGUI extends JFrame implements ActionListener, Thread.Uncaught
     private ClientGUI() {
         Thread.setDefaultUncaughtExceptionHandler(this);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
         setSize(WIDTH, HEIGHT);
+        setLocation(screenSize.width / 2 - WIDTH / 2,  screenSize.height / 2 - HEIGHT / 2); // Окно рисуется в центре экрана
         JScrollPane scrollLog = new JScrollPane(log);
         JScrollPane scrollUser = new JScrollPane(userList);
         String[] users = {"user1", "user2", "user3", "user4", "user5",
@@ -58,9 +59,9 @@ public class ClientGUI extends JFrame implements ActionListener, Thread.Uncaught
         add(panelTop, BorderLayout.NORTH);
         add(panelBottom, BorderLayout.SOUTH);
 
-        tfMessage.addKeyListener(new KeyAdapter() {
+        tfMessage.addKeyListener(new KeyAdapter() { // Слушатель нажатия на Enter
             @Override
-            public void keyTyped(KeyEvent e) {
+            public void keyReleased(KeyEvent e) {
                 if (e.getKeyChar() == KeyEvent.VK_ENTER) {
                     sendMessage(tfMessage.getText());
                     tfMessage.setText("");
@@ -105,6 +106,7 @@ public class ClientGUI extends JFrame implements ActionListener, Thread.Uncaught
         System.exit(1);
     }
 
+    // Запись сообщений в окно сообщений
     private void sendMessage(String message) {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
@@ -119,9 +121,10 @@ public class ClientGUI extends JFrame implements ActionListener, Thread.Uncaught
 
     }
 
+    // Запись сообщений в текстовый файл
     private void writeToLog(String messageString) throws IOException {
-        PrintStream fileOutputStream = new PrintStream(new FileOutputStream("log.txt", true));
-        fileOutputStream.print(messageString);
-        fileOutputStream.close();
+        PrintStream ps = new PrintStream(new FileOutputStream("log.txt", true));
+        ps.print(messageString);
+        ps.close();
     }
 }
