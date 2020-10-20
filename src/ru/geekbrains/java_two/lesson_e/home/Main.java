@@ -46,6 +46,8 @@ public class Main {
 
         first.start();
         second.start();
+
+        first.join();
         second.join();
 
         System.arraycopy(a1, 0, arr, 0, h);
