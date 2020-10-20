@@ -16,7 +16,6 @@ public class Main {
 
     private static float oneThreadArrayCount() {
         float[] arr = new float[size];
-
         fillArray(arr);
 
         long startTime = System.currentTimeMillis();
@@ -32,7 +31,6 @@ public class Main {
         float[] arr = new float[size];
         float[] a1 = new float[h];
         float[] a2 = new float[h];
-
         fillArray(arr);
 
         long startTime = System.currentTimeMillis();
