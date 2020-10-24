@@ -10,7 +10,6 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.Socket;
 
-
 public class ClientGUI extends JFrame implements ActionListener,
         Thread.UncaughtExceptionHandler, SocketThreadListener {
 
@@ -34,6 +33,7 @@ public class ClientGUI extends JFrame implements ActionListener,
     private final JList<String> userList = new JList<>();
     private boolean shownIoErrors = false;
     private SocketThread socketThread;
+    private String userName;
 
     private ClientGUI() {
         Thread.setDefaultUncaughtExceptionHandler(this);
@@ -69,6 +69,8 @@ public class ClientGUI extends JFrame implements ActionListener,
         add(panelTop, BorderLayout.NORTH);
         add(panelBottom, BorderLayout.SOUTH);
 
+        panelBottom.setVisible(false);
+
         setVisible(true);
     }
 
@@ -84,10 +86,12 @@ public class ClientGUI extends JFrame implements ActionListener,
         } else if (src == btnSend || src == tfMessage) {
             sendMessage();
         } else if (src == btnLogin) {
-            connect();
-            panelTop.setVisible(false);
-            panelBottom.setVisible(true);
+            if (connect()) {
+                panelTop.setVisible(false);
+                panelBottom.setVisible(true);
+            }
         } else if (src == btnDisconnect) {
+            disconnect();
             panelBottom.setVisible(false);
             panelTop.setVisible(true);
         } else {
@@ -95,18 +99,27 @@ public class ClientGUI extends JFrame implements ActionListener,
         }
     }
 
-    private void connect() {
+    // Отсоединение от сервера
+    private void disconnect() {
+        socketThread.close();
+        log.setText(null);
+    }
+
+    // Метод теперь возвращает false, если не удалось соединиться с сервером и показывает окно предупреждения
+    private boolean connect() {
         try {
             Socket socket = new Socket(tfIPAddress.getText(), Integer.parseInt(tfPort.getText()));
             socketThread = new SocketThread("Client", this, socket);
+            return true;
         } catch (IOException e) {
-            showException(Thread.currentThread(), e);
+            JOptionPane.showMessageDialog(this, "Не удалось подключиться к серверу", "Предупреждение", JOptionPane.WARNING_MESSAGE);
+            return false;
         }
     }
 
     private void sendMessage() {
         String msg = tfMessage.getText();
-        String username = tfLogin.getText();
+        userName = tfLogin.getText();
         if ("".equals(msg)) return;
         tfMessage.setText(null);
         tfMessage.grabFocus();
@@ -116,7 +129,7 @@ public class ClientGUI extends JFrame implements ActionListener,
     private void putLog(String msg) {
         if ("".equals(msg)) return;
         SwingUtilities.invokeLater(() -> {
-            log.append(msg + "\n");
+            log.append(userName + ":   " + msg + "\n");
             log.setCaretPosition(log.getDocument().getLength());
         });
     }
@@ -152,7 +165,7 @@ public class ClientGUI extends JFrame implements ActionListener,
 
     @Override
     public void onSocketStop(SocketThread thread) {
-        putLog("Stop");
+        putLog("Disconnected from server");
     }
 
     @Override

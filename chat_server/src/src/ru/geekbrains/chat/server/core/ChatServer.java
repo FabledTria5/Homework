@@ -80,24 +80,21 @@ public class ChatServer implements ServerSocketThreadListener, SocketThreadListe
     @Override
     public synchronized void onSocketStart(SocketThread thread, Socket socket) {
         putLog("Socket created");
-
     }
 
     @Override
     public synchronized void onSocketStop(SocketThread thread) {
         putLog("Socket stopped");
-
     }
 
     @Override
     public synchronized void onSocketReady(SocketThread thread, Socket socket) {
         putLog("Socket ready");
-
     }
 
     @Override
     public synchronized void onReceiveString(SocketThread thread, Socket socket, String msg) {
-        thread.sendMessage("echo: " + msg);
+        thread.sendMessage(msg);
     }
 
     @Override
