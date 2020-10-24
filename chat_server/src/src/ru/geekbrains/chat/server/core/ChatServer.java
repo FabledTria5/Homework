@@ -14,11 +14,12 @@ public class ChatServer implements ServerSocketThreadListener, SocketThreadListe
     private final DateFormat DATE_FORMAT = new SimpleDateFormat("HH:mm:ss: ");
 
     private ServerSocketThread server = null;
+
     public void start(int port) {
         if (server != null && server.isAlive()) {
             System.out.println("Server already started");
         } else {
-            server = new ServerSocketThread(this, "Chat server", 8189, 2000);
+            server = new ServerSocketThread(this, "Chat server", port, 2000);
         }
     }
 
@@ -38,8 +39,7 @@ public class ChatServer implements ServerSocketThreadListener, SocketThreadListe
 
     /**
      * Server methods
-     *
-     * */
+     */
 
     @Override
     public void onServerStart(ServerSocketThread thread) {
@@ -49,19 +49,16 @@ public class ChatServer implements ServerSocketThreadListener, SocketThreadListe
     @Override
     public void onServerStop(ServerSocketThread thread) {
         putLog("Server thread stopped");
-
     }
 
     @Override
     public void onServerSocketCreated(ServerSocketThread thread, ServerSocket server) {
         putLog("Server socket created");
-
     }
 
     @Override
     public void onServerTimeout(ServerSocketThread thread, ServerSocket server) {
         //putLog("Server timeout");
-
     }
 
     @Override
@@ -69,7 +66,6 @@ public class ChatServer implements ServerSocketThreadListener, SocketThreadListe
         putLog("Client connected");
         String name = "SocketThread " + socket.getInetAddress() + ":" + socket.getPort();
         new SocketThread(name, this, socket);
-
     }
 
     @Override
@@ -79,8 +75,7 @@ public class ChatServer implements ServerSocketThreadListener, SocketThreadListe
 
     /**
      * Socket methods
-     *
-     * */
+     */
 
     @Override
     public synchronized void onSocketStart(SocketThread thread, Socket socket) {

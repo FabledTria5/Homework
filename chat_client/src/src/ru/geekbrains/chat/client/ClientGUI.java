@@ -7,7 +7,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.net.Socket;
 
@@ -53,6 +52,7 @@ public class ClientGUI extends JFrame implements ActionListener,
         btnSend.addActionListener(this);
         tfMessage.addActionListener(this);
         btnLogin.addActionListener(this);
+        btnDisconnect.addActionListener(this);
 
         panelTop.add(tfIPAddress);
         panelTop.add(tfPort);
@@ -73,12 +73,7 @@ public class ClientGUI extends JFrame implements ActionListener,
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new ClientGUI();
-            }
-        });
+        SwingUtilities.invokeLater(ClientGUI::new);
     }
 
     @Override
@@ -90,6 +85,11 @@ public class ClientGUI extends JFrame implements ActionListener,
             sendMessage();
         } else if (src == btnLogin) {
             connect();
+            panelTop.setVisible(false);
+            panelBottom.setVisible(true);
+        } else if (src == btnDisconnect) {
+            panelBottom.setVisible(false);
+            panelTop.setVisible(true);
         } else {
             showException(Thread.currentThread(), new RuntimeException("Unknown action source: " + src));
         }
@@ -102,7 +102,6 @@ public class ClientGUI extends JFrame implements ActionListener,
         } catch (IOException e) {
             showException(Thread.currentThread(), e);
         }
-
     }
 
     private void sendMessage() {
@@ -111,31 +110,14 @@ public class ClientGUI extends JFrame implements ActionListener,
         if ("".equals(msg)) return;
         tfMessage.setText(null);
         tfMessage.grabFocus();
-//        putLog(String.format("%s: %s", username, msg));
-//        wrtMsgToLogFile(msg, username);
         socketThread.sendMessage(msg);
-    }
-
-    private void wrtMsgToLogFile(String msg, String username) {
-        try (FileWriter out = new FileWriter("log.txt", true)) {
-            out.write(username + ": " + msg + "\n");
-            out.flush();
-        } catch (IOException e) {
-            if (!shownIoErrors) {
-                shownIoErrors = true;
-                showException(Thread.currentThread(), e);
-            }
-        }
     }
 
     private void putLog(String msg) {
         if ("".equals(msg)) return;
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                log.append(msg + "\n");
-                log.setCaretPosition(log.getDocument().getLength());
-            }
+        SwingUtilities.invokeLater(() -> {
+            log.append(msg + "\n");
+            log.setCaretPosition(log.getDocument().getLength());
         });
     }
 
@@ -161,7 +143,7 @@ public class ClientGUI extends JFrame implements ActionListener,
 
     /**
      * Socket thread listener methods
-     * */
+     */
 
     @Override
     public void onSocketStart(SocketThread thread, Socket socket) {
