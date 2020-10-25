@@ -109,7 +109,8 @@ public class ClientGUI extends JFrame implements ActionListener,
     private boolean connect() {
         try {
             Socket socket = new Socket(tfIPAddress.getText(), Integer.parseInt(tfPort.getText()));
-            socketThread = new SocketThread("Client", this, socket);
+            userName = tfLogin.getText();
+            socketThread = new SocketThread(userName, this, socket);
             return true;
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Не удалось подключиться к серверу", "Предупреждение", JOptionPane.WARNING_MESSAGE);
@@ -119,7 +120,6 @@ public class ClientGUI extends JFrame implements ActionListener,
 
     private void sendMessage() {
         String msg = tfMessage.getText();
-        userName = tfLogin.getText();
         if ("".equals(msg)) return;
         tfMessage.setText(null);
         tfMessage.grabFocus();
