@@ -113,7 +113,7 @@ public class ChatServer implements ServerSocketThreadListener, SocketThreadListe
     public synchronized void onReceiveString(SocketThread thread, Socket socket, String msg) {
         ClientThread client = (ClientThread) thread;
         if (client.isAuthorized()) {
-            handleAutorizedMessage(client, msg);
+            handleAuthorizedMessage(client, msg);
         } else {
             handleNonAuthorizedMessage(client, msg);
         }
@@ -138,7 +138,7 @@ public class ChatServer implements ServerSocketThreadListener, SocketThreadListe
         sendToAllAuthorizedClients(Library.getTypeBroadcast("Server", nickname + " connected"));
     }
 
-    private void handleAutorizedMessage(ClientThread client, String msg) {
+    private void handleAuthorizedMessage(ClientThread client, String msg) {
         sendToAllAuthorizedClients(Library.getTypeBroadcast(client.getNickname(), msg));
     }
 

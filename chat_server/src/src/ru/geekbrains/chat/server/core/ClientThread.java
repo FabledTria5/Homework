@@ -15,7 +15,6 @@ public class ClientThread extends SocketThread {
         super(name, listener, socket);
     }
 
-
     public String getNickname() {
         return nickname;
     }

@@ -14,8 +14,11 @@ import java.net.Socket;
 public class ClientGUI extends JFrame implements ActionListener,
         Thread.UncaughtExceptionHandler, SocketThreadListener {
 
-    private static final int WIDTH = 400;
-    private static final int HEIGHT = 300;
+    private static final int WIDTH = 800;
+    private static final int HEIGHT = 600;
+    private static final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    double POX_X = screenSize.getWidth() / 2;
+    double POX_Y = screenSize.getHeight() / 2;
 
     private final JTextArea log = new JTextArea();
     private final JPanel panelTop = new JPanel(new GridLayout(2, 3));
@@ -40,6 +43,7 @@ public class ClientGUI extends JFrame implements ActionListener,
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setSize(WIDTH, HEIGHT);
+        setBounds((int) POX_X - WIDTH / 2, (int) POX_Y - HEIGHT / 2, WIDTH, HEIGHT);
         log.setEditable(false);
         log.setLineWrap(true);
         JScrollPane scrollLog = new JScrollPane(log);
@@ -104,7 +108,6 @@ public class ClientGUI extends JFrame implements ActionListener,
 
     private void sendMessage() {
         String msg = tfMessage.getText();
-        String username = tfLogin.getText();
         if ("".equals(msg)) return;
         tfMessage.setText(null);
         tfMessage.grabFocus();
@@ -113,8 +116,15 @@ public class ClientGUI extends JFrame implements ActionListener,
 
     private void putLog(String msg) {
         if ("".equals(msg)) return;
+        String[] message = msg.split("±");
         SwingUtilities.invokeLater(() -> {
-            log.append(msg + "\n");
+            if (message.length == 1) {
+                log.append(msg.substring(1) + "\n");
+            } else {
+                if (message.length == Library.TYPE_BROADCAST_LENGTH) {
+                    log.append(message[1] + " (" + message[2] + ") " + message[3] + "\n");
+                }
+            }
             log.setCaretPosition(log.getDocument().getLength());
         });
     }
@@ -145,7 +155,7 @@ public class ClientGUI extends JFrame implements ActionListener,
 
     @Override
     public void onSocketStart(SocketThread thread, Socket socket) {
-        putLog("Start");
+
     }
 
     @Override

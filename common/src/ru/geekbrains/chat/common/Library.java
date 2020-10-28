@@ -1,9 +1,13 @@
 package ru.geekbrains.chat.common;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Library {
 
     public static final int MSG_PREFIX = 0;
     public static final int AUTH_REQUEST_LENGTH = 3;
+    public static final int TYPE_BROADCAST_LENGTH = 4;
     public static final String DELIMITER = "±";
     public static final String AUTH_REQUEST = "/auth_request";
     public static final String AUTH_ACCEPT = "/auth_accept";
@@ -28,7 +32,9 @@ public class Library {
     }
 
     public static String getTypeBroadcast(String src, String message) {
-        return TYPE_BROADCAST + DELIMITER + System.currentTimeMillis() +
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        return TYPE_BROADCAST + DELIMITER + dtf.format(now) +
                 DELIMITER + src + DELIMITER + message;
     }
 

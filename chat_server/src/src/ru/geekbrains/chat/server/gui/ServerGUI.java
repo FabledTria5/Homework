@@ -22,12 +22,7 @@ public class ServerGUI extends JFrame implements ActionListener,
     private final JTextArea log = new JTextArea();
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new ServerGUI();
-            }
-        });
+        SwingUtilities.invokeLater(ServerGUI::new);
     }
 
     private ServerGUI() {
