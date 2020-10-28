@@ -1,5 +1,6 @@
 package src.ru.geekbrains.chat.client;
 
+import ru.geekbrains.chat.common.Library;
 import src.ru.geekbrains.network.SocketThread;
 import src.ru.geekbrains.network.SocketThreadListener;
 
@@ -33,7 +34,6 @@ public class ClientGUI extends JFrame implements ActionListener,
     private final JList<String> userList = new JList<>();
     private boolean shownIoErrors = false;
     private SocketThread socketThread;
-    private String userName;
 
     private ClientGUI() {
         Thread.setDefaultUncaughtExceptionHandler(this);
@@ -63,13 +63,12 @@ public class ClientGUI extends JFrame implements ActionListener,
         panelBottom.add(btnDisconnect, BorderLayout.WEST);
         panelBottom.add(tfMessage, BorderLayout.CENTER);
         panelBottom.add(btnSend, BorderLayout.EAST);
+        panelBottom.setVisible(false);
 
         add(scrollLog, BorderLayout.CENTER);
         add(scrollUser, BorderLayout.EAST);
         add(panelTop, BorderLayout.NORTH);
         add(panelBottom, BorderLayout.SOUTH);
-
-        panelBottom.setVisible(false);
 
         setVisible(true);
     }
@@ -86,40 +85,26 @@ public class ClientGUI extends JFrame implements ActionListener,
         } else if (src == btnSend || src == tfMessage) {
             sendMessage();
         } else if (src == btnLogin) {
-            if (connect()) {
-                panelTop.setVisible(false);
-                panelBottom.setVisible(true);
-            }
+            connect();
         } else if (src == btnDisconnect) {
-            disconnect();
-            panelBottom.setVisible(false);
-            panelTop.setVisible(true);
+            socketThread.close();
         } else {
             showException(Thread.currentThread(), new RuntimeException("Unknown action source: " + src));
         }
     }
 
-    // Отсоединение от сервера
-    private void disconnect() {
-        socketThread.close();
-        log.setText(null);
-    }
-
-    // Метод теперь возвращает false, если не удалось соединиться с сервером и показывает окно предупреждения
-    private boolean connect() {
+    private void connect() {
         try {
             Socket socket = new Socket(tfIPAddress.getText(), Integer.parseInt(tfPort.getText()));
-            userName = tfLogin.getText();
-            socketThread = new SocketThread(userName, this, socket);
-            return true;
+            socketThread = new SocketThread("Client", this, socket);
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(this, "Не удалось подключиться к серверу", "Предупреждение", JOptionPane.WARNING_MESSAGE);
-            return false;
+            showException(Thread.currentThread(), e);
         }
     }
 
     private void sendMessage() {
         String msg = tfMessage.getText();
+        String username = tfLogin.getText();
         if ("".equals(msg)) return;
         tfMessage.setText(null);
         tfMessage.grabFocus();
@@ -129,7 +114,7 @@ public class ClientGUI extends JFrame implements ActionListener,
     private void putLog(String msg) {
         if ("".equals(msg)) return;
         SwingUtilities.invokeLater(() -> {
-            log.append(userName + ":   " + msg + "\n");
+            log.append(msg + "\n");
             log.setCaretPosition(log.getDocument().getLength());
         });
     }
@@ -156,7 +141,7 @@ public class ClientGUI extends JFrame implements ActionListener,
 
     /**
      * Socket thread listener methods
-     */
+     * */
 
     @Override
     public void onSocketStart(SocketThread thread, Socket socket) {
@@ -165,12 +150,17 @@ public class ClientGUI extends JFrame implements ActionListener,
 
     @Override
     public void onSocketStop(SocketThread thread) {
-        putLog("Disconnected from server");
+        panelBottom.setVisible(false);
+        panelTop.setVisible(true);
     }
 
     @Override
     public void onSocketReady(SocketThread thread, Socket socket) {
-        putLog("Ready");
+        panelBottom.setVisible(true);
+        panelTop.setVisible(false);
+        String login = tfLogin.getText();
+        String password = new String(tfPassword.getPassword());
+        thread.sendMessage(Library.getAuthRequest(login, password));
     }
 
     @Override
@@ -182,5 +172,4 @@ public class ClientGUI extends JFrame implements ActionListener,
     public void onSocketException(SocketThread thread, Exception exception) {
         showException(thread, exception);
     }
-
 }
