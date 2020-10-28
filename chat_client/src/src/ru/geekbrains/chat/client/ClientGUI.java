@@ -151,7 +151,7 @@ public class ClientGUI extends JFrame implements ActionListener,
 
     /**
      * Socket thread listener methods
-     * */
+     */
 
     @Override
     public void onSocketStart(SocketThread thread, Socket socket) {
@@ -175,7 +175,14 @@ public class ClientGUI extends JFrame implements ActionListener,
 
     @Override
     public void onReceiveString(SocketThread thread, Socket socket, String msg) {
-        putLog(msg);
+        String[] message = msg.split("±");
+        if (message.length == 1) {
+            putLog(msg.substring(1) + "\n");
+        } else {
+            if (message.length == Library.TYPE_BROADCAST_LENGTH) {
+                putLog(message[1] + " (" + message[2] + ") " + message[3] + "\n");
+            }
+        }
     }
 
     @Override
