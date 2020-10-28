@@ -115,16 +115,8 @@ public class ClientGUI extends JFrame implements ActionListener,
     }
 
     private void putLog(String msg) {
-        if ("".equals(msg)) return;
-        String[] message = msg.split("±");
         SwingUtilities.invokeLater(() -> {
-            if (message.length == 1) {
-                log.append(msg.substring(1) + "\n");
-            } else {
-                if (message.length == Library.TYPE_BROADCAST_LENGTH) {
-                    log.append(message[1] + " (" + message[2] + ") " + message[3] + "\n");
-                }
-            }
+            log.append(msg);
             log.setCaretPosition(log.getDocument().getLength());
         });
     }
