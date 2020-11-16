@@ -1,4 +1,4 @@
-package main.java.ru.geekbrains.java_three.lesson_a.home;
+package ru.geekbrains.java_three.lesson_a.home;
 
 public class Apple extends Fruit {
 

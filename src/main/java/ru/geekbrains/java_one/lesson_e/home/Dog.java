@@ -1,4 +1,4 @@
-package main.java.ru.geekbrains.java_one.lesson_e.home;
+package ru.geekbrains.java_one.lesson_e.home;
 
 public class Dog extends Animal {
 

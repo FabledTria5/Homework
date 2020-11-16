@@ -1,4 +1,4 @@
-package main.java.ru.geekbrains.java_one.lesson_c.home;
+package ru.geekbrains.java_one.lesson_c.home;
 
 import java.util.Random;
 import java.util.Scanner;

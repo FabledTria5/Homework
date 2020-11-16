@@ -1,4 +1,4 @@
-package main.java.ru.geekbrains.java_two.lesson_c.home;
+package ru.geekbrains.java_two.lesson_c.home;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -9,7 +9,7 @@ public class PhoneBook {
 
     public static void addPerson(Person person) {
         if (!phoneBook.containsKey(person.getLastName())) {
-            var persons = new ArrayList<Person>();
+            ArrayList<Person> persons = new ArrayList<>();
             persons.add(person);
             phoneBook.put(person.getLastName(), persons);
         } else {
@@ -18,7 +18,7 @@ public class PhoneBook {
     }
 
     public static ArrayList<String> getPhoneNumber(String personLastName) {
-        var phones = new ArrayList<String>();
+        ArrayList<String> phones = new ArrayList<>();
         for (Person person : phoneBook.get(personLastName)) {
             phones.add(person.getPhones());
         }
@@ -26,7 +26,7 @@ public class PhoneBook {
     }
 
     public static ArrayList<String> getMails(String personLastName) {
-        var mails = new ArrayList<String>();
+        ArrayList<String> mails = new ArrayList<>();
         for (Person person : phoneBook.get(personLastName)) {
             mails.add(person.getMails());
         }

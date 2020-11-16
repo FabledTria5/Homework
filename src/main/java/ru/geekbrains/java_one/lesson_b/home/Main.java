@@ -1,4 +1,4 @@
-package main.java.ru.geekbrains.java_one.lesson_b.home;
+package ru.geekbrains.java_one.lesson_b.home;
 
 import java.util.Arrays;
 

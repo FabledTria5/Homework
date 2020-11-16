@@ -1,4 +1,4 @@
-package main.java.ru.geekbrains.java_two.lesson_c.home;
+package ru.geekbrains.java_two.lesson_c.home;
 
 import java.util.Arrays;
 import java.util.HashMap;

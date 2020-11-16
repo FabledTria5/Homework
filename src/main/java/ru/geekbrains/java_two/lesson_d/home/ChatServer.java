@@ -1,4 +1,4 @@
-package main.java.ru.geekbrains.java_two.lesson_d.home;
+package ru.geekbrains.java_two.lesson_d.home;
 
 public class ChatServer {
     public void start(int port) {

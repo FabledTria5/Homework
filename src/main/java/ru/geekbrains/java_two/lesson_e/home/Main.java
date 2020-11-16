@@ -1,4 +1,4 @@
-package main.java.ru.geekbrains.java_two.lesson_e.home;
+package ru.geekbrains.java_two.lesson_e.home;
 
 public class Main {
 

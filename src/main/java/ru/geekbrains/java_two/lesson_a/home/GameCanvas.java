@@ -1,4 +1,4 @@
-package main.java.ru.geekbrains.java_two.lesson_a.home;
+package ru.geekbrains.java_two.lesson_a.home;
 
 import javax.swing.*;
 import java.awt.*;

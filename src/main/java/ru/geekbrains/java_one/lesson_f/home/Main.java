@@ -1,4 +1,4 @@
-package main.java.ru.geekbrains.java_one.lesson_f.home;
+package ru.geekbrains.java_one.lesson_f.home;
 
 import java.io.*;
 import java.util.Scanner;
