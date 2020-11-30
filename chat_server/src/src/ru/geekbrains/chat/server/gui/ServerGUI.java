@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Logger;
 
 public class ServerGUI extends JFrame implements ActionListener,
         Thread.UncaughtExceptionHandler, ChatServerListener {
@@ -20,6 +21,7 @@ public class ServerGUI extends JFrame implements ActionListener,
     private final JButton btnStop = new JButton("Stop");
     private final JPanel panelTop = new JPanel(new GridLayout(1, 2));
     private final JTextArea log = new JTextArea();
+    private static final Logger serverLogger = Logger.getLogger("serverLogger");
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(ServerGUI::new);
@@ -51,7 +53,7 @@ public class ServerGUI extends JFrame implements ActionListener,
         if (src == btnStop) {
             chatServer.stop();
         } else if (src == btnStart) {
-            chatServer.start(8189);
+            chatServer.start();
         } else {
             throw new RuntimeException("Unknown action source: " + src);
         }
@@ -78,6 +80,7 @@ public class ServerGUI extends JFrame implements ActionListener,
         SwingUtilities.invokeLater(() -> {
             log.append(msg + "\n");
             log.setCaretPosition(log.getDocument().getLength());
+            serverLogger.info(msg);
         });
     }
 }

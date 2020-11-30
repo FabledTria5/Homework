@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.logging.Logger;
 
 public class ClientGUI extends JFrame implements ActionListener,
         Thread.UncaughtExceptionHandler, SocketThreadListener {
@@ -37,6 +38,7 @@ public class ClientGUI extends JFrame implements ActionListener,
     private final JList<String> userList = new JList<>();
     private boolean shownIoErrors = false;
     private SocketThread socketThread;
+    private static Logger logger = Logger.getLogger("clientLogger");
 
     private ClientGUI() {
         Thread.setDefaultUncaughtExceptionHandler(this);
@@ -118,6 +120,7 @@ public class ClientGUI extends JFrame implements ActionListener,
         SwingUtilities.invokeLater(() -> {
             log.append(msg);
             log.setCaretPosition(log.getDocument().getLength());
+            logger.info("Received message " + msg);
         });
     }
 

@@ -23,7 +23,7 @@ public class ChatServer implements ServerSocketThreadListener, SocketThreadListe
         this.listener = listener;
     }
 
-    public void start(int port) {
+    public void start() {
         if (server != null && server.isAlive()) {
             putLog("Server already started");
         } else {
